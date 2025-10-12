@@ -1,0 +1,10 @@
+# set Dock to auto-hide and remove auto-hiding delay
+defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide-delay -float 0
+defaults write com.apple.dock autohide-time-modifier -float 0
+
+# Apple Silicon macs use this to remove the delay:
+defaults write com.apple.dock autohide-delay -float 0 && defaults write com.apple.dock autohide-time-modifier -float 0.75 && killall Dock
+
+# show only open applications
+defaults write com.apple.dock static-only -bool true

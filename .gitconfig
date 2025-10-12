@@ -1,0 +1,11 @@
+[user]
+	name = Kelvin Ampofo
+	email = kelvnamp@gmail.com
+[maintenance]
+	repo = /Users/kelvinampofo/Developer/workspaces/kelvinamp.me
+[branch]
+	sort = -committerdate
+[column]
+	ui = auto
+[push]
+	autoSetupRemote = true
