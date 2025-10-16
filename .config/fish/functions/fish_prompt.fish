@@ -2,9 +2,11 @@ function fish_prompt
         set -l last_command_status $status
 
         if not set -q -g __fish_prompt_helpers_initialized
+                # cache helper definitions to avoid repeatedly redefining them on each prompt draw
                 set -g __fish_prompt_helpers_initialized
 
                 function __fish_prompt_git_branch
+                        # prefer the symbolic branch name; fall back to the short commit hash when detached
                         set -l branch (git symbolic-ref --quiet HEAD 2>/dev/null)
                         if set -q branch[1]
                                 echo (string replace -r '^refs/heads/' '' $branch)
@@ -39,6 +41,8 @@ function fish_prompt
         set -l current_directory $color_cyan(prompt_pwd)
 
         set -l repository_segment
+
+        # build git metadata segment if we are inside a repository
         if __fish_prompt_is_git_repo
                 set -l branch_name (__fish_prompt_git_branch)
                 set -l commit_hash (git rev-parse --short HEAD 2>/dev/null)
