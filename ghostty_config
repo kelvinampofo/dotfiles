@@ -1,0 +1,14 @@
+macos-titlebar-style = native
+
+window-height = 28
+window-width = 88
+
+font-family = "Berkeley Mono"
+font-size = 13
+font-thicken = true
+
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
+
+mouse-hide-while-typing = true
