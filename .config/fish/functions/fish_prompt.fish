@@ -33,7 +33,7 @@ function fish_prompt
                 set prompt_indicator_color $color_red
         end
 
-        set -l prompt_indicator "$prompt_indicator_color➜"
+        set -l prompt_indicator ''
         if fish_is_root_user
                 set prompt_indicator "$prompt_indicator_color#"
         end
@@ -57,9 +57,17 @@ function fish_prompt
                 end
         end
 
-        if test -n "$repository_segment"
-                echo -n -s $prompt_indicator ' ' $current_directory ' ' $repository_segment $color_reset ' '
-        else
-                echo -n -s $prompt_indicator ' ' $current_directory $color_reset ' '
+        set -l prompt_components
+
+        if test -n "$prompt_indicator"
+                set prompt_components $prompt_components $prompt_indicator
         end
+
+        set prompt_components $prompt_components $current_directory
+
+        if test -n "$repository_segment"
+                set prompt_components $prompt_components $repository_segment
+        end
+
+        echo -n -s (string join ' ' $prompt_components) $color_reset ' '
 end
