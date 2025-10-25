@@ -10,15 +10,27 @@ set -U fish_user_paths /opt/homebrew/bin $fish_user_paths
 alias lls='ls -lhSr'
 alias hs='history | grep'
 
-alias gs='git status'
+
+alias gd='git diff'
+
+alias ga='git add'
 alias gc='git commit'
+
+alias gp='git push'
+alias gpf='git push --force-with-lease'
+alias gu='git pull'
+
+alias gl='git log'
+alias gb='git branch'
+
+alias gi='git init'
+alias gcl='git clone'
+
+alias gs='git status --short'
 alias gcm='git checkout main'
 alias gcd='git checkout develop'
-alias gd='git diff'
-alias gp='git pull'
 alias gf='git fetch'
-alias up='git push'
-alias upf='git push --force-with-lease'
+
 
 alias vim='nvim'
 alias c='clear'
