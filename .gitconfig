@@ -9,3 +9,12 @@
 	ui = auto
 [push]
 	autoSetupRemote = true
+[core]
+	whitespace = error
+	preloadindex = true
+[status]
+	branch = true
+	showUntrackedFiles = all
+	showStash = true
+[diff]
+	renames = copies
