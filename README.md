@@ -34,3 +34,27 @@ where the tools expect them.
 
 With the links in place, edit the files inside `~/Developer/dotfiles` and commit
 changes as needed; the symlinked locations will pick up updates automatically.
+
+## Installing with Homebrew
+
+The repository ships with a `Brewfile` so you can install the expected CLI tools
+and apps in one pass.
+
+1. Make sure Homebrew is available (install it from [brew.sh](https://brew.sh) if needed):
+
+   ```txt
+   brew --version
+   ```
+
+2. From the repository root, install everything listed in the bundle:
+
+   ```txt
+   cd ~/Developer/dotfiles
+   brew bundle --file=Brewfile
+   ```
+
+3. (Optional) Remove formulas and casks that are no longer tracked:
+
+   ```txt
+   brew bundle cleanup --force --file=Brewfile
+   ```
