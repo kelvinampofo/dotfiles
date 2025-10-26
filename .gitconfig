@@ -18,3 +18,5 @@
 	showStash = true
 [diff]
 	renames = copies
+[rerere]
+	enabled = true
