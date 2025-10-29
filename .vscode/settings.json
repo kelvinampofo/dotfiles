@@ -1,0 +1,76 @@
+{
+  // general / workbench
+  "workbench.activityBar.location": "top",
+  "workbench.colorCustomizations": {
+    "editorCursor.foreground": "#FF4D00",
+    "editor.lineHighlightBackground": "#303239"
+  },
+  "workbench.editor.customLabels.patterns": {
+    "*/**/{index,page,route,styles}.{js,jsx,ts,tsx,mdx,css}": "${dirname}.${extname}"
+  },
+  "workbench.preferredLightColorTheme": "Default Light+",
+  "workbench.startupEditor": "none",
+
+  // editor
+  "editor.accessibilitySupport": "off",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
+  "editor.cursorBlinking": "phase",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.fontFamily": "Berkeley Mono",
+  "editor.fontLigatures": false,
+  "editor.fontSize": 14,
+  "editor.fontWeight": "600",
+  "editor.formatOnSave": true,
+  "editor.inlayHints.fontFamily": "Berkeley Mono",
+  "editor.inlineSuggest.fontFamily": "Berkeley Mono",
+  "editor.linkedEditing": true,
+  "editor.minimap.renderCharacters": false,
+  "editor.unicodeHighlight.allowedCharacters": {
+    "’": true
+  },
+  "editor.wordWrap": "on",
+
+  // language / linting
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "javascript.inlayHints.parameterNames.enabled": "all",
+  "typescript.inlayHints.parameterNames.enabled": "all",
+
+  // explorer / window
+  "explorer.compactFolders": false,
+  "window.autoDetectHighContrast": false,
+  "window.confirmBeforeClose": "always",
+  "window.systemColorTheme": "auto",
+
+  // terminal
+  "terminal.integrated.fontSize": 13,
+
+  // extensions
+  "cSpell.language": "en-GB",
+  "cSpell.userWords": [
+    "Ampofo",
+    "circ",
+    "color",
+    "colors",
+    "lerp",
+    "nums",
+    "Vite"
+  ],
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "github.copilot.selectedCompletionModel": "gpt-4.1-copilot",
+
+  // chat / markdown
+  "chat.agent.enabled": true,
+  "chat.editor.fontFamily": "Berkeley Mono",
+  "markdown.preview.fontFamily": "",
+
+  // other
+  "diffEditor.ignoreTrimWhitespace": true
+}
