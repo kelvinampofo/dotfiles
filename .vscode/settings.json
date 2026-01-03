@@ -3,7 +3,7 @@
   "workbench.activityBar.location": "top",
   "workbench.colorCustomizations": {
     "editorCursor.foreground": "#FF4D00",
-    "editor.lineHighlightBackground": "#303239"
+    "editor.lineHighlightBackground": "#26282a"
   },
   "workbench.editor.customLabels.patterns": {
     "*/**/{index,page,route,styles}.{js,jsx,ts,tsx,mdx,css}": "${dirname}.${extname}"
@@ -63,6 +63,8 @@
     "nums",
     "Vite"
   ],
+
+  // copilot
   "github.copilot.nextEditSuggestions.enabled": true,
   "github.copilot.selectedCompletionModel": "gpt-4.1-copilot",
 
