@@ -7,8 +7,8 @@ where the tools expect them.
 1. Clone the repository into the expected location:
 
    ```txt
-   git clone git@github.com:kelvinampofo/dotfiles.git ~/Developer/dotfiles
-   cd ~/Developer/dotfiles
+   git clone git@github.com:kelvinampofo/dotfiles.git ~/Developer/workspaces/dotfiles
+   cd ~/Developer/workspaces/dotfiles
    ```
 
 2. Back up any existing configs before replacing them:
@@ -21,9 +21,9 @@ where the tools expect them.
 3. Link the tracked versions into place:
 
    ```txt
-   ln -sf ~/Developer/dotfiles/.gitconfig ~/.gitconfig
+   ln -sf ~/Developer/workspaces/dotfiles/.gitconfig ~/.gitconfig
    mkdir -p ~/.config/fish
-   ln -sf ~/Developer/dotfiles/.config/fish/config.fish ~/.config/fish/config.fish
+   ln -sf ~/Developer/workspaces/dotfiles/.config/fish/config.fish ~/.config/fish/config.fish
    ```
 
 4. (Optional) Inspect the symlinks to confirm they point at the repository:
@@ -32,7 +32,7 @@ where the tools expect them.
    ls -l ~/.gitconfig ~/.config/fish/config.fish
    ```
 
-With the links in place, edit the files inside `~/Developer/dotfiles` and commit
+With the links in place, edit the files inside `~/Developer/workspaces/dotfiles` and commit
 changes as needed; the symlinked locations will pick up updates automatically.
 
 ## Installing with Homebrew
@@ -49,7 +49,7 @@ and apps in one pass.
 2. From the repository root, install everything listed in the bundle:
 
    ```txt
-   cd ~/Developer/dotfiles
+   cd ~/Developer/workspaces/dotfiles
    brew bundle --file=Brewfile
    ```
 

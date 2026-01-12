@@ -4,7 +4,7 @@ if status is-interactive
 end
 
 set -U fish_greeting
-set -U fish_user_paths $HOME/Developer/utils/bin $fish_user_paths
+set -U fish_user_paths $HOME/Developer/workspaces/utils/bin $fish_user_paths
 set -U fish_user_paths /opt/homebrew/bin $fish_user_paths 
 
 alias lls='ls -lhSr'
