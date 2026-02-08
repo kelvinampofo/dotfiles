@@ -3,21 +3,23 @@
   "workbench.activityBar.location": "top",
   "workbench.colorCustomizations": {
     "editorCursor.foreground": "#FF4D00",
-    "editor.lineHighlightBackground": "#26282a"
+    "editor.lineHighlightBackground": "#26282a",
   },
   "workbench.editor.customLabels.patterns": {
-    "*/**/{index,page,route,styles}.{js,jsx,ts,tsx,mdx,css}": "${dirname}.${extname}"
+    "*/**/{index,page,route,styles}.{js,jsx,ts,tsx,mdx,css}": "${dirname}.${extname}",
   },
   "workbench.preferredLightColorTheme": "Default Light+",
   "workbench.startupEditor": "none",
+  "workbench.list.smoothScrolling": true,
 
   // editor
   "editor.accessibilitySupport": "off",
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "always"
+    "source.fixAll.eslint": "always",
   },
   "editor.cursorBlinking": "phase",
   "editor.cursorSmoothCaretAnimation": "on",
+  "editor.smoothScrolling": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.fontFamily": "Berkeley Mono",
   "editor.fontLigatures": false,
@@ -29,7 +31,7 @@
   "editor.linkedEditing": true,
   "editor.minimap.renderCharacters": false,
   "editor.unicodeHighlight.allowedCharacters": {
-    "’": true
+    "’": true,
   },
   "editor.wordWrap": "on",
 
@@ -38,8 +40,9 @@
     "javascript",
     "javascriptreact",
     "typescript",
-    "typescriptreact"
+    "typescriptreact",
   ],
+
   "javascript.inlayHints.parameterNames.enabled": "all",
   "typescript.inlayHints.parameterNames.enabled": "all",
 
@@ -53,26 +56,32 @@
   "terminal.integrated.fontSize": 13,
 
   // extensions
-  "cSpell.language": "en-GB",
+  // "cSpell.language": "en-GB",
   "cSpell.userWords": [
     "Ampofo",
     "circ",
     "color",
     "colors",
     "lerp",
+    "lerped",
     "nums",
-    "Vite"
+    "squircle",
+    "Vite",
   ],
 
   // copilot
   "github.copilot.nextEditSuggestions.enabled": true,
   "github.copilot.selectedCompletionModel": "gpt-4.1-copilot",
 
-  // chat / markdown
+  // chat
   "chat.agent.enabled": true,
   "chat.editor.fontFamily": "Berkeley Mono",
+
+  // markdown
   "markdown.preview.fontFamily": "",
 
   // other
-  "diffEditor.ignoreTrimWhitespace": true
+  "diffEditor.ignoreTrimWhitespace": true,
+  "debug.breakpointsView.presentation": "tree",
+  "chat.viewSessions.orientation": "stacked",
 }
