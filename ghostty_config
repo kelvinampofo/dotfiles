@@ -12,3 +12,5 @@ font-feature = -liga
 font-feature = -dlig
 
 mouse-hide-while-typing = true
+
+adjust-cell-height = 30
