@@ -1,16 +1,21 @@
 macos-titlebar-style = native
 
-window-height = 28
+# window
 window-width = 88
+window-height = 24
+window-color-space = display-p3
+adjust-cell-height = 30%
 
+# font
 font-family = "Berkeley Mono"
 font-size = 13
 font-thicken = true
-
 font-feature = -calt
 font-feature = -liga
 font-feature = -dlig
 
+# behaviour
 mouse-hide-while-typing = true
 
-adjust-cell-height = 30
+# terminal
+term = xterm-256color
