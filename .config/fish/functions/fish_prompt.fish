@@ -45,15 +45,9 @@ function fish_prompt
         # build git metadata segment if we are inside a repository
         if __fish_prompt_is_git_repo
                 set -l branch_name (__fish_prompt_git_branch)
-                set -l commit_hash (git rev-parse --short HEAD 2>/dev/null)
                 if test -n "$branch_name"
                         set -l branch_text "$color_red$branch_name"
-                        if test -n "$commit_hash"
-                                set -l hash_text "$color_red$commit_hash"
-                                set repository_segment (string join '' $color_blue $branch_text $color_blue '(' $hash_text $color_blue ')')
-                        else
-                                set repository_segment (string join '' $color_blue $branch_text $color_blue)
-                        end
+                        set repository_segment (string join '' $color_blue $branch_text $color_blue '>')
                 end
         end
 
