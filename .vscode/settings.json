@@ -88,5 +88,6 @@
   "diffEditor.ignoreTrimWhitespace": false,
   "debug.breakpointsView.presentation": "tree",
   "chat.viewSessions.orientation": "stacked",
+  "chat.agentsControl.enabled": "hidden",
   "workbench.colorTheme": "Dark Modern"
 }
