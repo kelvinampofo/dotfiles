@@ -1,9 +1,11 @@
-brew "codex"
 brew "fastfetch"
 brew "ffmpeg"
 brew "fish"
 brew "neovim"
 brew "nvm"
+brew "shellcheck"
+brew "shfmt"
 
+cask "codex"
 cask "ghostty"
 cask "stats"
