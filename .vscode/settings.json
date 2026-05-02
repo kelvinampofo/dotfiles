@@ -3,19 +3,20 @@
   "workbench.activityBar.location": "top",
   "workbench.colorCustomizations": {
     "editorCursor.foreground": "#FF4D00",
-    "editor.lineHighlightBackground": "#303239"
+    "editor.lineHighlightBackground": "#303239",
   },
   "workbench.editor.customLabels.patterns": {
-    "*/**/{index,page,route,styles}.{js,jsx,ts,tsx,mdx,css}": "${dirname}.${extname}"
+    "*/**/{index,page,route,styles}.{js,jsx,ts,tsx,mdx,css}": "${dirname}.${extname}",
   },
   "workbench.preferredLightColorTheme": "Light+",
   "workbench.startupEditor": "none",
   "workbench.list.smoothScrolling": true,
+  "workbench.colorTheme": "Dark Modern",
 
   // editor
   "editor.accessibilitySupport": "off",
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "always"
+    "source.fixAll.eslint": "always",
   },
   "editor.cursorBlinking": "phase",
   "editor.cursorSmoothCaretAnimation": "on",
@@ -31,7 +32,7 @@
   "editor.linkedEditing": true,
   "editor.minimap.renderCharacters": false,
   "editor.unicodeHighlight.allowedCharacters": {
-    "’": true
+    "’": true,
   },
   "editor.wordWrap": "on",
   "editor.matchBrackets": "near",
@@ -41,7 +42,7 @@
     "javascript",
     "javascriptreact",
     "typescript",
-    "typescriptreact"
+    "typescriptreact",
   ],
 
   "js/ts.inlayHints.parameterNames.enabled": "all",
@@ -56,7 +57,6 @@
   "terminal.integrated.fontSize": 13,
 
   // extensions
-  // "cSpell.language": "en-GB",
   "cSpell.userWords": [
     "Ampofo",
     "circ",
@@ -70,16 +70,18 @@
     "squircle",
     "srgb",
     "Vite",
-    "WCAG"
+    "WCAG",
   ],
 
   // copilot
   "github.copilot.nextEditSuggestions.enabled": true,
-  "github.copilot.selectedCompletionModel": "gpt-4.1-copilot",
+  "github.copilot.selectedCompletionModel": "",
 
   // chat
   "chat.agent.enabled": true,
   "chat.editor.fontFamily": "Berkeley Mono",
+  "chat.viewSessions.orientation": "stacked",
+  "chat.agentsControl.enabled": "hidden",
 
   // markdown
   "markdown.preview.fontFamily": "",
@@ -87,7 +89,4 @@
   // other
   "diffEditor.ignoreTrimWhitespace": false,
   "debug.breakpointsView.presentation": "tree",
-  "chat.viewSessions.orientation": "stacked",
-  "chat.agentsControl.enabled": "hidden",
-  "workbench.colorTheme": "Dark Modern"
 }
