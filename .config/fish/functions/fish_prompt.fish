@@ -50,6 +50,10 @@ function fish_prompt
 
         set -l prompt_components
 
+        if test -n "$prompt_indicator"
+                set prompt_components $prompt_components $prompt_indicator
+        end
+
         set prompt_components $prompt_components $current_directory
 
         if test -n "$repository_segment"
