@@ -1,0 +1,17 @@
+# Summarize changes in 50 characters or less
+
+# Explain what changed and why. Wrap body lines at 72 characters.
+# Focus on context, tradeoffs, and side effects; the diff explains how.
+
+# References:
+# Resolves: #123
+# See also: #456
+
+# Commit message checklist:
+# - Separate subject from body with a blank line.
+# - Keep the subject around 50 characters.
+# - Capitalize the subject.
+# - Do not end the subject with a period.
+# - Use the imperative mood: "Add", "Fix", "Update", "Remove".
+# - Wrap the body at 72 characters.
+# - Use the body to explain what and why, not how.

@@ -12,6 +12,8 @@
 [core]
 	whitespace = error
 	preloadindex = true
+[commit]
+	template = ~/Developer/workspaces/dotfiles/commit-template.txt
 [status]
 	branch = true
 	showUntrackedFiles = all
