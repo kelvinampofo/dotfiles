@@ -20,22 +20,19 @@ function fish_prompt
                         or return 1
                         git rev-parse --git-dir >/dev/null 2>&1
                 end
+
         end
 
         set -l color_cyan (set_color -o cyan)
         set -l color_red (set_color -o red)
-        set -l color_green (set_color -o green)
-        set -l color_blue (set_color -o blue)
+        set -l color_branch (set_color FF6B6B)
         set -l color_reset (set_color normal)
-
-        set -l prompt_indicator_color $color_green
-        if test $last_command_status != 0
-                set prompt_indicator_color $color_red
-        end
 
         set -l prompt_indicator ''
         if fish_is_root_user
-                set prompt_indicator "$prompt_indicator_color#"
+                set prompt_indicator "$color_red#"
+        else if test $last_command_status != 0
+                set prompt_indicator "$color_red!"
         end
 
         set -l current_directory $color_cyan(prompt_pwd)
@@ -46,16 +43,12 @@ function fish_prompt
         if __fish_prompt_is_git_repo
                 set -l branch_name (__fish_prompt_git_branch)
                 if test -n "$branch_name"
-                        set -l branch_text "$color_red$branch_name"
-                        set repository_segment (string join '' $color_blue $branch_text $color_blue '>')
+                        set -l branch_text "$color_branch$branch_name"
+                        set repository_segment (string join '' $branch_text "$color_reset>")
                 end
         end
 
         set -l prompt_components
-
-        if test -n "$prompt_indicator"
-                set prompt_components $prompt_components $prompt_indicator
-        end
 
         set prompt_components $prompt_components $current_directory
 
