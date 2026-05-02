@@ -1,6 +1,7 @@
 macos-titlebar-style = native
 macos-non-native-fullscreen = visible-menu
 
+mouse-hide-while-typing = true
 
 window-width = 90
 window-height = 26
@@ -12,7 +13,5 @@ font-thicken = true
 font-feature = -calt
 font-feature = -liga
 font-feature = -dlig
-
-mouse-hide-while-typing = true
 
 term = xterm-256color

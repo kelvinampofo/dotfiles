@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+set -u
+
+repo_root="$(git -C "$(dirname "${BASH_SOURCE[0]}")/.." rev-parse --show-toplevel)"
+status=0
+
+ok() {
+	printf 'ok: %s\n' "$1"
+}
+
+warn() {
+	printf 'warn: %s\n' "$1"
+	status=1
+}
+
+check_command() {
+	local command_name="$1"
+
+	if command -v "$command_name" >/dev/null 2>&1; then
+		ok "$command_name found at $(command -v "$command_name")"
+	else
+		warn "$command_name is not installed or not on PATH"
+	fi
+}
+
+check_source() {
+	local path="$1"
+
+	if [ -e "$repo_root/$path" ]; then
+		ok "$path exists"
+	else
+		warn "$path is missing"
+	fi
+}
+
+check_link() {
+	local source="$1"
+	local target="$2"
+
+	if [ -L "$target" ] && [ "$(readlink "$target")" = "$source" ]; then
+		ok "$target points to $source"
+	elif [ -e "$target" ]; then
+		warn "$target exists but does not point to $source"
+	else
+		warn "$target is not linked"
+	fi
+}
+
+check_command brew
+check_command fish
+check_command git
+
+check_source ".gitconfig"
+check_source ".config/fish/config.fish"
+check_source ".config/fish/functions/fish_prompt.fish"
+check_source ".config/fish/functions/fish_right_prompt.fish"
+check_source ".config/fish/functions/fish_greeting.fish"
+check_source ".config/ghostty/config.ghostty"
+check_source ".vscode/settings.json"
+check_source "Brewfile"
+
+check_link "$repo_root/.gitconfig" "$HOME/.gitconfig"
+check_link "$repo_root/.config/fish/config.fish" "$HOME/.config/fish/config.fish"
+check_link "$repo_root/.config/fish/functions/fish_prompt.fish" "$HOME/.config/fish/functions/fish_prompt.fish"
+check_link "$repo_root/.config/fish/functions/fish_right_prompt.fish" "$HOME/.config/fish/functions/fish_right_prompt.fish"
+check_link "$repo_root/.config/fish/functions/fish_greeting.fish" "$HOME/.config/fish/functions/fish_greeting.fish"
+check_link "$repo_root/.config/ghostty/config.ghostty" "$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
+check_link "$repo_root/.vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+
+exit "$status"
