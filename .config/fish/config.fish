@@ -42,7 +42,3 @@ abbr -a gsta 'git stash apply'
 abbr -a vim 'nvim'
 abbr -a c 'clear'
 abbr -a e 'exit'
-
-function v
-    open $argv[1] -a "Visual Studio Code"
-end

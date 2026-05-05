@@ -25,6 +25,7 @@ link_entry "$repo_root/.config/fish/config.fish" "$HOME/.config/fish/config.fish
 link_entry "$repo_root/.config/fish/functions/fish_prompt.fish" "$HOME/.config/fish/functions/fish_prompt.fish"
 link_entry "$repo_root/.config/fish/functions/fish_right_prompt.fish" "$HOME/.config/fish/functions/fish_right_prompt.fish"
 link_entry "$repo_root/.config/fish/functions/fish_greeting.fish" "$HOME/.config/fish/functions/fish_greeting.fish"
+link_entry "$repo_root/.config/fish/functions/v.fish" "$HOME/.config/fish/functions/v.fish"
 link_entry "$repo_root/.config/ghostty/config.ghostty" "$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
 link_entry "$repo_root/.vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
 
