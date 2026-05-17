@@ -23,6 +23,14 @@ and symlinks untouched.
 
 Managed links live in `links.manifest`.
 
+## macOS
+
+```plain
+make macos
+```
+
+`make macos` applies the tracked macOS defaults.
+
 ## Homebrew
 
 ```txt
