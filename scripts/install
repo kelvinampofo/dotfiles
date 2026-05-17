@@ -1,32 +1,76 @@
 #!/usr/bin/env bash
-set -euo pipefail
+
+set -u
 
 repo_root="$(git -C "$(dirname "${BASH_SOURCE[0]}")/.." rev-parse --show-toplevel)"
 status=0
 
+if [ -t 1 ]; then
+	green="$(tput setaf 2)"
+	yellow="$(tput setaf 3)"
+	bold="$(tput bold)"
+	reset="$(tput sgr0)"
+else
+	green=""
+	yellow=""
+	bold=""
+	reset=""
+fi
+
+section() {
+	printf '\n%s%s%s\n' "$bold" "$1" "$reset"
+}
+
+ok() {
+	printf '  %s[ok]%s   %s\n' "$green" "$reset" "$1"
+}
+
+warn() {
+	printf '  %s[warn]%s %s\n' "$yellow" "$reset" "$1"
+	status=1
+}
+
 link_entry() {
-	local source="$1"
+	local source="$repo_root/$1"
 	local target="$2"
 
-	mkdir -p "$(dirname "$target")"
-
-	if [ -e "$target" ] && [ ! -L "$target" ]; then
-		printf 'Refusing to replace %s because it is not a symlink. Back it up first.\n' "$target" >&2
-		status=1
+	if [ ! -e "$source" ]; then
+		warn "$1 is missing"
 		return
 	fi
 
-	ln -sfn "$source" "$target"
-	printf 'Linked %s -> %s\n' "$target" "$source"
+	if ! mkdir -p "$(dirname "$target")"; then
+		warn "could not create $(dirname "$target")"
+		return
+	fi
+
+	if [ -e "$target" ] && [ ! -L "$target" ]; then
+		warn "$target exists but is not a symlink. Back it up first."
+		return
+	fi
+
+	if ln -sfn "$source" "$target"; then
+		ok "$target -> $1"
+	else
+		warn "could not link $target -> $1"
+	fi
 }
 
-link_entry "$repo_root/.gitconfig" "$HOME/.gitconfig"
-link_entry "$repo_root/.config/fish/config.fish" "$HOME/.config/fish/config.fish"
-link_entry "$repo_root/.config/fish/functions/fish_prompt.fish" "$HOME/.config/fish/functions/fish_prompt.fish"
-link_entry "$repo_root/.config/fish/functions/fish_right_prompt.fish" "$HOME/.config/fish/functions/fish_right_prompt.fish"
-link_entry "$repo_root/.config/fish/functions/fish_greeting.fish" "$HOME/.config/fish/functions/fish_greeting.fish"
-link_entry "$repo_root/.config/fish/functions/v.fish" "$HOME/.config/fish/functions/v.fish"
-link_entry "$repo_root/.config/ghostty/config.ghostty" "$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
-link_entry "$repo_root/.vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+section "Links"
+link_entry ".gitconfig" "$HOME/.gitconfig"
+link_entry ".config/fish/config.fish" "$HOME/.config/fish/config.fish"
+link_entry ".config/fish/functions/fish_prompt.fish" "$HOME/.config/fish/functions/fish_prompt.fish"
+link_entry ".config/fish/functions/fish_right_prompt.fish" "$HOME/.config/fish/functions/fish_right_prompt.fish"
+link_entry ".config/fish/functions/fish_greeting.fish" "$HOME/.config/fish/functions/fish_greeting.fish"
+link_entry ".config/fish/functions/v.fish" "$HOME/.config/fish/functions/v.fish"
+link_entry ".config/ghostty/config.ghostty" "$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
+link_entry ".vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+
+printf '\n'
+if [ "$status" -eq 0 ]; then
+	printf '%sInstall complete.%s\n' "$green" "$reset"
+else
+	printf '%sInstall completed with warnings.%s\n' "$yellow" "$reset"
+fi
 
 exit "$status"

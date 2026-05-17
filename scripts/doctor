@@ -5,69 +5,100 @@ set -u
 repo_root="$(git -C "$(dirname "${BASH_SOURCE[0]}")/.." rev-parse --show-toplevel)"
 status=0
 
+if [ -t 1 ]; then
+	green="$(tput setaf 2)"
+	yellow="$(tput setaf 3)"
+	bold="$(tput bold)"
+	reset="$(tput sgr0)"
+else
+	green=""
+	yellow=""
+	bold=""
+	reset=""
+fi
+
+section() {
+	printf '\n%s%s%s\n' "$bold" "$1" "$reset"
+}
+
 ok() {
-	printf 'ok: %s\n' "$1"
+	printf '  %s[ok]%s   %s\n' "$green" "$reset" "$1"
 }
 
 warn() {
-	printf 'warn: %s\n' "$1"
+	printf '  %s[warn]%s %s\n' "$yellow" "$reset" "$1"
 	status=1
 }
 
 check_command() {
-	local command_name="$1"
+	local name="$1"
+	local path
 
-	if command -v "$command_name" >/dev/null 2>&1; then
-		ok "$command_name found at $(command -v "$command_name")"
+	if path="$(command -v "$name")"; then
+		ok "$name -> $path"
 	else
-		warn "$command_name is not installed or not on PATH"
+		warn "$name is not on PATH"
 	fi
 }
 
-check_source() {
+check_file() {
 	local path="$1"
 
 	if [ -e "$repo_root/$path" ]; then
-		ok "$path exists"
+		ok "$path"
 	else
 		warn "$path is missing"
 	fi
 }
 
 check_link() {
-	local source="$1"
+	local source="$repo_root/$1"
 	local target="$2"
+	local actual
 
-	if [ -L "$target" ] && [ "$(readlink "$target")" = "$source" ]; then
-		ok "$target points to $source"
+	if [ ! -e "$source" ]; then
+		warn "$1 is missing"
+		return
+	fi
+
+	if [ -L "$target" ]; then
+		actual="$(readlink "$target")"
+
+		if [ "$actual" = "$source" ]; then
+			ok "$target -> $1"
+		else
+			warn "$target points to $actual"
+		fi
 	elif [ -e "$target" ]; then
-		warn "$target exists but does not point to $source"
+		warn "$target exists but is not a symlink"
 	else
 		warn "$target is not linked"
 	fi
 }
 
-check_command brew
-check_command fish
-check_command git
+section "Tools"
+for command_name in brew fish git; do
+	check_command "$command_name"
+done
 
-check_source ".gitconfig"
-check_source ".config/fish/config.fish"
-check_source ".config/fish/functions/fish_prompt.fish"
-check_source ".config/fish/functions/fish_right_prompt.fish"
-check_source ".config/fish/functions/fish_greeting.fish"
-check_source ".config/fish/functions/v.fish"
-check_source ".config/ghostty/config.ghostty"
-check_source ".vscode/settings.json"
-check_source "Brewfile"
+section "Files"
+check_file "Brewfile"
 
-check_link "$repo_root/.gitconfig" "$HOME/.gitconfig"
-check_link "$repo_root/.config/fish/config.fish" "$HOME/.config/fish/config.fish"
-check_link "$repo_root/.config/fish/functions/fish_prompt.fish" "$HOME/.config/fish/functions/fish_prompt.fish"
-check_link "$repo_root/.config/fish/functions/fish_right_prompt.fish" "$HOME/.config/fish/functions/fish_right_prompt.fish"
-check_link "$repo_root/.config/fish/functions/fish_greeting.fish" "$HOME/.config/fish/functions/fish_greeting.fish"
-check_link "$repo_root/.config/fish/functions/v.fish" "$HOME/.config/fish/functions/v.fish"
-check_link "$repo_root/.config/ghostty/config.ghostty" "$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
-check_link "$repo_root/.vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+section "Links"
+check_link ".gitconfig" "$HOME/.gitconfig"
+check_link ".config/fish/config.fish" "$HOME/.config/fish/config.fish"
+check_link ".config/fish/functions/fish_prompt.fish" "$HOME/.config/fish/functions/fish_prompt.fish"
+check_link ".config/fish/functions/fish_right_prompt.fish" "$HOME/.config/fish/functions/fish_right_prompt.fish"
+check_link ".config/fish/functions/fish_greeting.fish" "$HOME/.config/fish/functions/fish_greeting.fish"
+check_link ".config/fish/functions/v.fish" "$HOME/.config/fish/functions/v.fish"
+check_link ".config/ghostty/config.ghostty" "$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
+check_link ".vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+
+printf '\n'
+if [ "$status" -eq 0 ]; then
+	printf '%sAll checks passed.%s\n' "$green" "$reset"
+else
+	printf '%sSome checks need attention.%s\n' "$yellow" "$reset"
+fi
 
 exit "$status"
