@@ -1,34 +1,8 @@
 #!/usr/bin/env bash
 
-set -u
+set -eu
 
-repo_root="$(git -C "$(dirname "${BASH_SOURCE[0]}")/.." rev-parse --show-toplevel)"
-status=0
-
-if [ -t 1 ]; then
-	green="$(tput setaf 2)"
-	yellow="$(tput setaf 3)"
-	bold="$(tput bold)"
-	reset="$(tput sgr0)"
-else
-	green=""
-	yellow=""
-	bold=""
-	reset=""
-fi
-
-section() {
-	printf '\n%s%s%s\n' "$bold" "$1" "$reset"
-}
-
-ok() {
-	printf '  %s[ok]%s   %s\n' "$green" "$reset" "$1"
-}
-
-warn() {
-	printf '  %s[warn]%s %s\n' "$yellow" "$reset" "$1"
-	status=1
-}
+. "$(dirname "${BASH_SOURCE[0]}")/lib"
 
 check_command() {
 	local name="$1"
@@ -83,22 +57,9 @@ done
 
 section "Files"
 check_file "Brewfile"
+check_file "links.manifest"
 
 section "Links"
-check_link ".gitconfig" "$HOME/.gitconfig"
-check_link ".config/fish/config.fish" "$HOME/.config/fish/config.fish"
-check_link ".config/fish/functions/fish_prompt.fish" "$HOME/.config/fish/functions/fish_prompt.fish"
-check_link ".config/fish/functions/fish_right_prompt.fish" "$HOME/.config/fish/functions/fish_right_prompt.fish"
-check_link ".config/fish/functions/fish_greeting.fish" "$HOME/.config/fish/functions/fish_greeting.fish"
-check_link ".config/fish/functions/v.fish" "$HOME/.config/fish/functions/v.fish"
-check_link ".config/ghostty/config.ghostty" "$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
-check_link ".vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+each_manifest_entry check_link
 
-printf '\n'
-if [ "$status" -eq 0 ]; then
-	printf '%sAll checks passed.%s\n' "$green" "$reset"
-else
-	printf '%sSome checks need attention.%s\n' "$yellow" "$reset"
-fi
-
-exit "$status"
+finish "All checks passed." "Some checks need attention."

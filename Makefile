@@ -1,7 +1,10 @@
-.PHONY: install doctor brew brew-check
+.PHONY: install uninstall doctor brew brew-check
 
 install:
 	./scripts/install
+
+uninstall:
+	./scripts/uninstall
 
 doctor:
 	./scripts/doctor

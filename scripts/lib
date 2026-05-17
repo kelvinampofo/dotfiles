@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+
+repo_root="$(git -C "$(dirname "${BASH_SOURCE[0]}")/.." rev-parse --show-toplevel)"
+manifest="$repo_root/links.manifest"
+status=0
+
+# Only use terminal formatting when output is going straight to a terminal
+if [ -t 1 ]; then
+	green="$(tput setaf 2)"
+	yellow="$(tput setaf 3)"
+	bold="$(tput bold)"
+	reset="$(tput sgr0)"
+else
+	green=""
+	yellow=""
+	bold=""
+	reset=""
+fi
+
+section() {
+	printf '\n%s%s%s\n' "$bold" "$1" "$reset"
+}
+
+ok() {
+	printf '  %s[ok]%s   %s\n' "$green" "$reset" "$1"
+}
+
+warn() {
+	printf '  %s[warn]%s %s\n' "$yellow" "$reset" "$1"
+	# Keep going after a warning, but make the script exit non-zero.
+	status=1
+}
+
+each_manifest_entry() {
+	local callback="$1"
+	local source
+	local target
+
+	if [ ! -f "$manifest" ]; then
+		warn "links.manifest is missing"
+		return
+	fi
+
+	# links.manifest uses source|target lines. IFS='|' makes read split there.
+	while IFS='|' read -r source target; do
+		[ -n "$source" ] || continue
+		[[ "$source" != "#"* ]] || continue
+
+		# Expand a leading literal $HOME in the manifest target.
+		"$callback" "$source" "${target/#\$HOME/$HOME}"
+	done <"$manifest"
+}
+
+finish() {
+	local success="$1"
+	local failure="$2"
+
+	printf '\n'
+	if [ "$status" -eq 0 ]; then
+		printf '%s%s%s\n' "$green" "$success" "$reset"
+	else
+		printf '%s%s%s\n' "$yellow" "$failure" "$reset"
+	fi
+
+	exit "$status"
+}

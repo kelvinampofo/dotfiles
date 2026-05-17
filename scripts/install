@@ -1,33 +1,35 @@
 #!/usr/bin/env bash
 
-set -u
+set -eu
 
-repo_root="$(git -C "$(dirname "${BASH_SOURCE[0]}")/.." rev-parse --show-toplevel)"
-status=0
+. "$(dirname "${BASH_SOURCE[0]}")/lib"
 
-if [ -t 1 ]; then
-	green="$(tput setaf 2)"
-	yellow="$(tput setaf 3)"
-	bold="$(tput bold)"
-	reset="$(tput sgr0)"
-else
-	green=""
-	yellow=""
-	bold=""
-	reset=""
-fi
+backup_root="$HOME/.dotfiles-backups/$(date +%Y%m%d-%H%M%S)"
 
-section() {
-	printf '\n%s%s%s\n' "$bold" "$1" "$reset"
-}
+backup_entry() {
+	local target="$1"
+	local relative_path
+	local backup
 
-ok() {
-	printf '  %s[ok]%s   %s\n' "$green" "$reset" "$1"
-}
+	if [[ "$target" == "$HOME/"* ]]; then
+		relative_path="${target#"$HOME"/}"
+	else
+		relative_path="${target#/}"
+	fi
 
-warn() {
-	printf '  %s[warn]%s %s\n' "$yellow" "$reset" "$1"
-	status=1
+	backup="$backup_root/$relative_path"
+
+	if ! mkdir -p "$(dirname "$backup")"; then
+		warn "could not create backup directory for $target"
+		return 1
+	fi
+
+	if mv "$target" "$backup"; then
+		ok "backed up $target -> $backup"
+	else
+		warn "could not back up $target"
+		return 1
+	fi
 }
 
 link_entry() {
@@ -45,8 +47,7 @@ link_entry() {
 	fi
 
 	if [ -e "$target" ] && [ ! -L "$target" ]; then
-		warn "$target exists but is not a symlink. Back it up first."
-		return
+		backup_entry "$target" || return
 	fi
 
 	if ln -sfn "$source" "$target"; then
@@ -57,20 +58,6 @@ link_entry() {
 }
 
 section "Links"
-link_entry ".gitconfig" "$HOME/.gitconfig"
-link_entry ".config/fish/config.fish" "$HOME/.config/fish/config.fish"
-link_entry ".config/fish/functions/fish_prompt.fish" "$HOME/.config/fish/functions/fish_prompt.fish"
-link_entry ".config/fish/functions/fish_right_prompt.fish" "$HOME/.config/fish/functions/fish_right_prompt.fish"
-link_entry ".config/fish/functions/fish_greeting.fish" "$HOME/.config/fish/functions/fish_greeting.fish"
-link_entry ".config/fish/functions/v.fish" "$HOME/.config/fish/functions/v.fish"
-link_entry ".config/ghostty/config.ghostty" "$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
-link_entry ".vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+each_manifest_entry link_entry
 
-printf '\n'
-if [ "$status" -eq 0 ]; then
-	printf '%sInstall complete.%s\n' "$green" "$reset"
-else
-	printf '%sInstall completed with warnings.%s\n' "$yellow" "$reset"
-fi
-
-exit "$status"
+finish "Install complete." "Install completed with warnings."

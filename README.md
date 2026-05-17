@@ -13,9 +13,15 @@ make doctor
 ```
 
 `make install` links the tracked configs into their normal local locations. It
-will not replace a real file or directory; move anything conflicting aside first.
+backs up real files or directories before replacing them with symlinks. Backups
+are written to `~/.dotfiles-backups/<timestamp>/`.
 
 `make doctor` checks that the expected tools and symlinks are in place.
+
+`make uninstall` removes symlinks created by this repo. It leaves unrelated files
+and symlinks untouched.
+
+Managed links live in `links.manifest`.
 
 ## Homebrew
 
