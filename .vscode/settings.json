@@ -1,24 +1,28 @@
 {
   // general / workbench
+  "window.autoDetectHighContrast": false,
+  "window.commandCenter": false,
+  "window.confirmBeforeClose": "always",
+  "window.systemColorTheme": "auto",
+
   "workbench.activityBar.location": "top",
+  "workbench.browser.showInTitleBar": true,
   "workbench.colorCustomizations": {
     "editorCursor.foreground": "#FF4D00",
     "editor.lineHighlightBackground": "#303239"
   },
-  "workbench.editor.customLabels.patterns": {
-    "*/**/{index,page,route,styles}.{js,jsx,ts,tsx,mdx,css}": "${dirname}.${extname}"
-  },
-  "workbench.preferredLightColorTheme": "Light+",
-  "workbench.startupEditor": "none",
-  "workbench.list.smoothScrolling": true,
   "workbench.colorTheme": "Dark Modern",
   "workbench.diffEditorAssociations": {
     "*.md": "vscode.markdown.preview.editor"
   },
-  "workbench.navigationControl.enabled": false,
+  "workbench.editor.customLabels.patterns": {
+    "*/**/{index,page,route,styles}.{js,jsx,ts,tsx,mdx,css}": "${dirname}.${extname}"
+  },
   "workbench.layoutControl.enabled": false,
-  "workbench.browser.showInTitleBar": true,
-  "window.commandCenter": false,
+  "workbench.list.smoothScrolling": true,
+  "workbench.navigationControl.enabled": false,
+  "workbench.preferredLightColorTheme": "Light+",
+  "workbench.startupEditor": "none",
 
   // editor
   "editor.accessibilitySupport": "off",
@@ -27,7 +31,6 @@
   },
   "editor.cursorBlinking": "phase",
   "editor.cursorSmoothCaretAnimation": "on",
-  "editor.smoothScrolling": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.fontFamily": "Berkeley Mono",
   "editor.fontLigatures": false,
@@ -37,12 +40,13 @@
   "editor.inlayHints.fontFamily": "Berkeley Mono",
   "editor.inlineSuggest.fontFamily": "Berkeley Mono",
   "editor.linkedEditing": true,
+  "editor.matchBrackets": "near",
   "editor.minimap.renderCharacters": false,
+  "editor.smoothScrolling": true,
   "editor.unicodeHighlight.allowedCharacters": {
     "’": true
   },
   "editor.wordWrap": "on",
-  "editor.matchBrackets": "near",
 
   // language / linting
   "eslint.validate": [
@@ -51,17 +55,25 @@
     "typescript",
     "typescriptreact"
   ],
-
   "js/ts.inlayHints.parameterNames.enabled": "all",
 
-  // explorer / window
+  // explorer
   "explorer.compactFolders": false,
-  "window.autoDetectHighContrast": false,
-  "window.confirmBeforeClose": "always",
-  "window.systemColorTheme": "auto",
 
   // terminal
   "terminal.integrated.fontSize": 13,
+
+  // chat
+  "chat.agent.enabled": true,
+  "chat.editor.fontFamily": "Berkeley Mono",
+  "chat.viewSessions.orientation": "stacked",
+
+  // copilot
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "github.copilot.selectedCompletionModel": "",
+
+  // markdown
+  "markdown.preview.fontFamily": "",
 
   // extensions
   "cSpell.userWords": [
@@ -80,19 +92,7 @@
     "WCAG"
   ],
 
-  // copilot
-  "github.copilot.nextEditSuggestions.enabled": true,
-  "github.copilot.selectedCompletionModel": "",
-
-  // chat
-  "chat.agent.enabled": true,
-  "chat.editor.fontFamily": "Berkeley Mono",
-  "chat.viewSessions.orientation": "stacked",
-
-  // markdown
-  "markdown.preview.fontFamily": "",
-
   // other
-  "diffEditor.ignoreTrimWhitespace": false,
-  "debug.breakpointsView.presentation": "tree"
+  "debug.breakpointsView.presentation": "tree",
+  "diffEditor.ignoreTrimWhitespace": false
 }
