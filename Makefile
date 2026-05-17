@@ -1,4 +1,4 @@
-.PHONY: install uninstall doctor brew brew-check
+.PHONY: install uninstall doctor test brew brew-check
 
 install:
 	./scripts/install
@@ -8,6 +8,10 @@ uninstall:
 
 doctor:
 	./scripts/doctor
+
+test:
+	bash -n scripts/doctor scripts/install scripts/lib scripts/uninstall
+	shellcheck -x -P scripts --exclude=SC2329 scripts/doctor scripts/install scripts/uninstall scripts/lib
 
 brew:
 	brew bundle --file=Brewfile

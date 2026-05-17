@@ -25,6 +25,17 @@ check_file() {
 	fi
 }
 
+check_brew_bundle() {
+	local output
+
+	if output="$(brew bundle check --verbose --file="$repo_root/Brewfile" 2>&1)"; then
+		ok "Brewfile bundle is satisfied"
+	else
+		warn "Brewfile bundle needs attention"
+		printf '%s\n' "$output" | sed 's/^/         /'
+	fi
+}
+
 check_link() {
 	local source="$repo_root/$1"
 	local target="$2"
@@ -58,6 +69,9 @@ done
 section "Files"
 check_file "Brewfile"
 check_file "links.manifest"
+
+section "Homebrew"
+check_brew_bundle
 
 section "Links"
 each_manifest_entry check_link
