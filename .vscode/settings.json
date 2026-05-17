@@ -55,6 +55,9 @@
     "typescript",
     "typescriptreact"
   ],
+  "files.associations": {
+    ".gitmessage": "git-commit"
+  },
   "js/ts.inlayHints.parameterNames.enabled": "all",
 
   // explorer

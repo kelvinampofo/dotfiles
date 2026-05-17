@@ -4,6 +4,7 @@
 
 # Git
 .gitconfig|$HOME/.gitconfig
+.gitmessage|$HOME/.gitmessage
 
 # Fish
 .config/fish/config.fish|$HOME/.config/fish/config.fish

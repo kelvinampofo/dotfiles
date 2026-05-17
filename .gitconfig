@@ -13,7 +13,7 @@
 	whitespace = error
 	preloadindex = true
 [commit]
-	template = ~/Developer/workspaces/dotfiles/commit-template.txt
+	template = ~/.gitmessage
 [status]
 	branch = true
 	showUntrackedFiles = all
