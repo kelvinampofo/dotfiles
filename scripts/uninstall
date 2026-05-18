@@ -4,30 +4,16 @@ set -eu
 
 . "$(dirname "${BASH_SOURCE[0]}")/lib"
 
-unlink_entry() {
-	local source="$repo_root/$1"
-	local target="$2"
-	local actual
-
-	if [ ! -L "$target" ]; then
-		warn "$target is not a symlink"
-		return
-	fi
-
-	actual="$(readlink "$target")"
-	if [ "$actual" != "$source" ]; then
-		warn "$target points to $actual"
-		return
-	fi
-
-	if rm "$target"; then
-		ok "removed $target"
+unstow_packages() {
+	# --delete removes the symlinks Stow owns, but leaves the repo files alone.
+	if (cd "$repo_root" && stow --delete "${packages[@]}"); then
+		ok "unstowed ${packages[*]}"
 	else
-		warn "could not remove $target"
+		warn "could not unstow ${packages[*]}"
 	fi
 }
 
 section "Links"
-each_manifest_entry unlink_entry
+unstow_packages
 
 finish "Uninstall complete." "Uninstall completed with warnings."

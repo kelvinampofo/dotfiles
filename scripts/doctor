@@ -36,21 +36,36 @@ check_brew_bundle() {
 	fi
 }
 
-check_link() {
-	local source="$repo_root/$1"
+resolve_link_target() {
+	local link="$1"
 	local target="$2"
+
+	if [[ "$target" = /* ]]; then
+		printf '%s\n' "$target"
+	else
+		# Stow usually creates relative symlinks, so resolve them before comparing.
+		printf '%s/%s\n' "$(cd "$(dirname "$link")/$(dirname "$target")" && pwd -P)" "$(basename "$target")"
+	fi
+}
+
+check_link() {
+	local source="$1"
+	local target="$2"
+	local label="$3"
 	local actual
+	local actual_path
 
 	if [ ! -e "$source" ]; then
-		warn "$1 is missing"
+		warn "$label is missing"
 		return
 	fi
 
 	if [ -L "$target" ]; then
 		actual="$(readlink "$target")"
+		actual_path="$(resolve_link_target "$target" "$actual")"
 
-		if [ "$actual" = "$source" ]; then
-			ok "$target -> $1"
+		if [ "$actual_path" = "$source" ]; then
+			ok "$target -> $label"
 		else
 			warn "$target points to $actual"
 		fi
@@ -62,18 +77,17 @@ check_link() {
 }
 
 section "Tools"
-for command_name in brew fish git; do
+for command_name in brew fish git stow; do
 	check_command "$command_name"
 done
 
 section "Files"
 check_file "Brewfile"
-check_file "links.manifest"
 
 section "Homebrew"
 check_brew_bundle
 
 section "Links"
-each_manifest_entry check_link
+each_package_file check_link
 
 finish "All checks passed." "Some checks need attention."

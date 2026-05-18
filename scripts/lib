@@ -1,8 +1,17 @@
 #!/usr/bin/env bash
 
+# Resolve the repo root from this file so scripts can be run from any directory.
 repo_root="$(git -C "$(dirname "${BASH_SOURCE[0]}")/.." rev-parse --show-toplevel)"
-manifest="$repo_root/links.manifest"
 status=0
+
+# Each name here is a GNU Stow package: files inside the package are linked
+# into the same relative path under $HOME.
+packages=(
+	git
+	fish
+	ghostty
+	vscode
+)
 
 # Only use terminal formatting when output is going straight to a terminal
 if [ -t 1 ]; then
@@ -31,24 +40,23 @@ warn() {
 	status=1
 }
 
-each_manifest_entry() {
+each_package_file() {
 	local callback="$1"
-	local source
+	local package
+	local path
+	local relative_path
 	local target
 
-	if [ ! -f "$manifest" ]; then
-		warn "links.manifest is missing"
-		return
-	fi
-
-	# links.manifest uses source|target lines. IFS='|' makes read split there.
-	while IFS='|' read -r source target; do
-		[ -n "$source" ] || continue
-		[[ "$source" != "#"* ]] || continue
-
-		# Expand a leading literal $HOME in the manifest target.
-		"$callback" "$source" "${target/#\$HOME/$HOME}"
-	done <"$manifest"
+	for package in "${packages[@]}"; do
+		# -print0 and read -d '' keep paths safe even when they contain spaces.
+		while IFS= read -r -d '' path; do
+			relative_path="${path#"$repo_root/$package/"}"
+			target="$HOME/$relative_path"
+			# Call the function name passed in as [callback] with source, target,
+			# and a human-readable label.
+			"$callback" "$path" "$target" "$package/$relative_path"
+		done < <(find "$repo_root/$package" -type f -print0)
+	done
 }
 
 finish() {
