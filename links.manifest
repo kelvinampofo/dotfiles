@@ -1,0 +1,18 @@
+# Each line is: path in this repo | path to link in your home directory.
+# For example: path/in/repo|$HOME/path/to/live/config
+# The scripts expand a leading $HOME in the target path.
+
+# Git
+.gitconfig|$HOME/.gitconfig
+.gitmessage|$HOME/.gitmessage
+
+# Fish
+.config/fish/config.fish|$HOME/.config/fish/config.fish
+.config/fish/functions/fish_prompt.fish|$HOME/.config/fish/functions/fish_prompt.fish
+.config/fish/functions/fish_right_prompt.fish|$HOME/.config/fish/functions/fish_right_prompt.fish
+.config/fish/functions/fish_greeting.fish|$HOME/.config/fish/functions/fish_greeting.fish
+.config/fish/functions/v.fish|$HOME/.config/fish/functions/v.fish
+
+# Apps
+.config/ghostty/config.ghostty|$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty
+.vscode/settings.json|$HOME/Library/Application Support/Code/User/settings.json

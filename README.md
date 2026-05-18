@@ -16,4 +16,4 @@ make bootstrap
 
 `make help` lists the available Make targets and what they do.
 
-Managed links are installed with GNU Stow packages.
+Managed links live in `links.manifest`.
