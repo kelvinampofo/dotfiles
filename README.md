@@ -11,10 +11,9 @@ git clone git@github.com:kelvinampofo/dotfiles.git ~/Developer/workspaces/dotfil
 cd ~/Developer/workspaces/dotfiles
 
 make help
-make install
-make doctor
+make bootstrap
 ```
 
 `make help` lists the available Make targets and what they do.
 
-Managed links live in `links.manifest`.
+Managed links are installed with GNU Stow packages.
