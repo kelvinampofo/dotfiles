@@ -5,6 +5,7 @@ brew "neovim"
 brew "nvm"
 brew "shellcheck"
 brew "shfmt"
+brew "yt-dlp"
 
 cask "codex"
 cask "ghostty"
