@@ -3,8 +3,8 @@ macos-non-native-fullscreen = visible-menu
 
 mouse-hide-while-typing = true
 
-window-width = 90
-window-height = 26
+window-width = 96
+window-height = 28
 adjust-cell-height = 30%
 
 font-family = "Berkeley Mono"
