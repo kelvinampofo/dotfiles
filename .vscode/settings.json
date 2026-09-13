@@ -1,10 +1,7 @@
 {
-  // general / workbench
-  "window.autoDetectHighContrast": false,
   "window.commandCenter": false,
-  "window.confirmBeforeClose": "always",
-  "window.systemColorTheme": "auto",
 
+  "workbench.experimental.modernUI": false,
   "workbench.activityBar.location": "top",
   "workbench.browser.showInTitleBar": true,
   "workbench.colorCustomizations": {
@@ -12,9 +9,6 @@
     "editor.lineHighlightBackground": "#303239"
   },
   "workbench.colorTheme": "Dark Modern",
-  "workbench.diffEditorAssociations": {
-    "*.md": "vscode.markdown.preview.editor"
-  },
   "workbench.editor.customLabels.patterns": {
     "*/**/{index,page,route,styles}.{js,jsx,ts,tsx,mdx,css}": "${dirname}.${extname}"
   },
@@ -24,7 +18,6 @@
   "workbench.preferredLightColorTheme": "Light+",
   "workbench.startupEditor": "none",
 
-  // editor
   "editor.accessibilitySupport": "off",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "always"
@@ -48,7 +41,6 @@
   },
   "editor.wordWrap": "on",
 
-  // language / linting
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -60,42 +52,24 @@
   },
   "js/ts.inlayHints.parameterNames.enabled": "all",
 
-  // explorer
   "explorer.compactFolders": false,
 
-  // terminal
   "terminal.integrated.fontSize": 13,
 
-  // chat
   "chat.agent.enabled": true,
   "chat.editor.fontFamily": "Berkeley Mono",
   "chat.viewSessions.orientation": "stacked",
 
-  // copilot
   "github.copilot.nextEditSuggestions.enabled": true,
   "github.copilot.selectedCompletionModel": "",
 
-  // markdown
   "markdown.preview.fontFamily": "",
 
-  // extensions
-  "cSpell.userWords": [
-    "Ampofo",
-    "circ",
-    "color",
-    "colors",
-    "kelvinampofo",
-    "lerp",
-    "lerped",
-    "nums",
-    "sidenote",
-    "squircle",
-    "srgb",
-    "Vite",
-    "WCAG"
-  ],
-
-  // other
   "debug.breakpointsView.presentation": "tree",
-  "diffEditor.ignoreTrimWhitespace": false
+  "diffEditor.ignoreTrimWhitespace": false,
+  "js/ts.experimental.useTsgo": true,
+  "[markdown]": {
+    "diffEditor.ignoreTrimWhitespace": false
+  },
+  "chat.titleBar.openInAgentsWindow.enabled": false
 }
