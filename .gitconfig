@@ -22,3 +22,5 @@
 	renames = copies
 [rerere]
 	enabled = true
+[pull]
+	ff = only
