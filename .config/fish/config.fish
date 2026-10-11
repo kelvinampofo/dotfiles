@@ -1,9 +1,3 @@
-if status is-interactive
-    # Use the latest LTS Node version when nvm is installed, but keep shell
-    # startup quiet and resilient on machines without nvm.
-    type -q nvm; and nvm use lts > /dev/null
-end
-
 # Keep the greeting disabled for this shell session without writing a universal
 # variable on every startup.
 set -g fish_greeting
@@ -11,6 +5,7 @@ set -g fish_greeting
 # Add Homebrew and personal utility scripts to PATH for this session only.
 # fish_add_path avoids duplicates, and --path avoids mutating universal vars.
 fish_add_path --path /opt/homebrew/bin
+test -d /Applications/Ghostty.app/Contents/MacOS; and fish_add_path --path /Applications/Ghostty.app/Contents/MacOS
 test -d $HOME/Developer/workspaces/utils/bin; and fish_add_path --path $HOME/Developer/workspaces/utils/bin
 
 abbr -a lls 'ls -lhSr'
