@@ -18,3 +18,4 @@
 # Apps
 .config/ghostty/config.ghostty|$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty
 .vscode/settings.json|$HOME/Library/Application Support/Code/User/settings.json
+.vscode/keybindings.json|$HOME/Library/Application Support/Code/User/keybindings.json
