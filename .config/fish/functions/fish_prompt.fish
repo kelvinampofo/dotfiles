@@ -25,7 +25,7 @@ function fish_prompt
 
         set -l color_cyan (set_color -o cyan)
         set -l color_red (set_color -o red)
-        set -l color_branch (set_color FF6B6B)
+        set -l color_branch (set_color B0B9F9)
         set -l color_reset (set_color normal)
 
         set -l prompt_indicator ''
@@ -43,8 +43,7 @@ function fish_prompt
         if __fish_prompt_is_git_repo
                 set -l branch_name (__fish_prompt_git_branch)
                 if test -n "$branch_name"
-                        set -l branch_text "$color_branch$branch_name"
-                        set repository_segment (string join '' $branch_text "$color_reset>")
+                        set repository_segment "$color_branch$branch_name"
                 end
         end
 
@@ -60,5 +59,5 @@ function fish_prompt
                 set prompt_components $prompt_components $repository_segment
         end
 
-        echo -n -s (string join ' ' $prompt_components) $color_reset ' '
+        echo -n -s (string join ' ' $prompt_components) ' ' (set_color CBA6F7) '>' $color_reset ' '
 end
