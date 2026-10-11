@@ -1,9 +1,8 @@
 {
   "window.commandCenter": false,
 
-  "workbench.experimental.modernUI": false,
   "workbench.activityBar.location": "top",
-  "workbench.browser.showInTitleBar": true,
+  "workbench.browser.showInTitleBar": false,
   "workbench.colorCustomizations": {
     "editorCursor.foreground": "#FF4D00",
     "editor.lineHighlightBackground": "#303239"
@@ -12,6 +11,7 @@
   "workbench.editor.customLabels.patterns": {
     "*/**/{index,page,route,styles}.{js,jsx,ts,tsx,mdx,css}": "${dirname}.${extname}"
   },
+  "workbench.experimental.modernUI": false,
   "workbench.layoutControl.enabled": false,
   "workbench.list.smoothScrolling": true,
   "workbench.navigationControl.enabled": false,
@@ -30,6 +30,7 @@
   "editor.fontSize": 14,
   "editor.fontWeight": "600",
   "editor.formatOnSave": true,
+  "editor.guides.bracketPairsHorizontal": false,
   "editor.inlayHints.fontFamily": "Berkeley Mono",
   "editor.inlineSuggest.fontFamily": "Berkeley Mono",
   "editor.linkedEditing": true,
@@ -41,35 +42,33 @@
   },
   "editor.wordWrap": "on",
 
+  "diffEditor.ignoreTrimWhitespace": false,
+
+  "explorer.compactFolders": false,
+  "files.associations": {
+    ".gitmessage": "git-commit"
+  },
+
+  "terminal.integrated.fontSize": 13,
+
+  "debug.breakpointsView.presentation": "tree",
+
   "eslint.validate": [
     "javascript",
     "javascriptreact",
     "typescript",
     "typescriptreact"
   ],
-  "files.associations": {
-    ".gitmessage": "git-commit"
-  },
+  "js/ts.experimental.useTsgo": true,
   "js/ts.inlayHints.parameterNames.enabled": "all",
-
-  "explorer.compactFolders": false,
-
-  "terminal.integrated.fontSize": 13,
+  "markdown.preview.fontFamily": "",
 
   "chat.agent.enabled": true,
   "chat.editor.fontFamily": "Berkeley Mono",
+  "chat.titleBar.openInAgentsWindow.enabled": false,
   "chat.viewSessions.orientation": "stacked",
-
   "github.copilot.nextEditSuggestions.enabled": true,
   "github.copilot.selectedCompletionModel": "",
 
-  "markdown.preview.fontFamily": "",
-
-  "debug.breakpointsView.presentation": "tree",
-  "diffEditor.ignoreTrimWhitespace": false,
-  "js/ts.experimental.useTsgo": true,
-  "[markdown]": {
-    "diffEditor.ignoreTrimWhitespace": false
-  },
-  "chat.titleBar.openInAgentsWindow.enabled": false
+  "excalidraw.theme": "auto"
 }
