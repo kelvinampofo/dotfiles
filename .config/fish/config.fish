@@ -5,6 +5,7 @@ set -g fish_greeting
 # Add Homebrew and personal utility scripts to PATH for this session only.
 # fish_add_path avoids duplicates, and --path avoids mutating universal vars.
 fish_add_path --path /opt/homebrew/bin
+fish_add_path --path $HOME/.local/bin
 test -d /Applications/Ghostty.app/Contents/MacOS; and fish_add_path --path /Applications/Ghostty.app/Contents/MacOS
 test -d $HOME/Developer/workspaces/utils/bin; and fish_add_path --path $HOME/Developer/workspaces/utils/bin
 
