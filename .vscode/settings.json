@@ -38,7 +38,8 @@
   "editor.minimap.renderCharacters": false,
   "editor.smoothScrolling": true,
   "editor.unicodeHighlight.allowedCharacters": {
-    "’": true
+    "’": true,
+    "–": true
   },
   "editor.wordWrap": "on",
 
