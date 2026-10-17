@@ -1,6 +1,6 @@
-.PHONY: help bootstrap install uninstall doctor check macos brew brew-check
+.PHONY: help bootstrap install uninstall doctor check fish macos brew brew-check
 
-SCRIPTS := scripts/doctor scripts/install scripts/lib scripts/macos scripts/uninstall
+SCRIPTS := scripts/doctor scripts/fish scripts/install scripts/lib scripts/macos scripts/uninstall
 
 help:
 	@echo "Targets:"
@@ -9,6 +9,7 @@ help:
 	@echo "  make uninstall    # remove symlinks managed by this repo"
 	@echo "  make doctor       # check tools, Homebrew, and managed links"
 	@echo "  make check        # validate shell scripts"
+	@echo "  make fish         # install fish plugins, Node and global npm packages"
 	@echo "  make macos        # apply tracked macOS defaults"
 	@echo "  make brew         # install Brewfile dependencies"
 	@echo "  make brew-check   # check Brewfile dependencies"
@@ -16,6 +17,7 @@ help:
 bootstrap:
 	$(MAKE) brew
 	$(MAKE) install
+	$(MAKE) fish
 	$(MAKE) doctor
 
 install:
@@ -30,6 +32,9 @@ doctor:
 check:
 	bash -n $(SCRIPTS)
 	shellcheck -x -P scripts --exclude=SC2329 $(SCRIPTS)
+
+fish:
+	./scripts/fish
 
 macos:
 	./scripts/macos

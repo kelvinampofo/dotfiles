@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2016 # fish code is single-quoted so bash leaves its variables alone
+
+set -eu
+
+. "$(dirname "${BASH_SOURCE[0]}")/lib"
+
+run_fish() {
+	local description="$1"
+	local command="$2"
+
+	if fish -c "$command"; then
+		ok "$description"
+	else
+		warn "could not $description"
+	fi
+}
+
+section "Fish"
+run_fish "install fish plugins" '
+	if not functions -q fisher
+		curl -fsSL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source
+	end
+	fisher update >/dev/null
+'
+
+section "Node"
+run_fish "install the default Node version" '
+	if set -q nvm_default_version
+		nvm use --silent $nvm_default_version
+	else
+		nvm install lts >/dev/null
+		and set -U nvm_default_version (nvm current)
+	end
+'
+run_fish "install global npm packages" '
+	nvm use --silent $nvm_default_version
+	command -q oxfmt; or npm install --global oxfmt >/dev/null
+'
+
+finish "Fish setup complete." "Fish setup completed with warnings."
