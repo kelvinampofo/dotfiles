@@ -1,19 +1,11 @@
 # Dotfiles
 
-Personal macOS dotfiles. The repo stores the source files; the live config
-locations point back here with symlinks.
-
-## Setup
+My macOS setup.
 
 ```txt
 git clone git@github.com:kelvinampofo/dotfiles.git ~/Developer/workspaces/dotfiles
-
 cd ~/Developer/workspaces/dotfiles
-
-make help
 make bootstrap
 ```
 
-`make help` lists the available Make targets and what they do.
-
-Managed links live in `links.manifest`.
+`make help` lists the other targets. Links live in `links.manifest`.

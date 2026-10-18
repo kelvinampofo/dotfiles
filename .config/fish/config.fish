@@ -2,6 +2,10 @@
 # variable on every startup.
 set -g fish_greeting
 
+if test (uname) = Darwin
+    set -gx SSH_SK_PROVIDER /usr/lib/ssh-keychain.dylib
+end
+
 # Add Homebrew and personal utility scripts to PATH for this session only.
 # fish_add_path avoids duplicates, and --path avoids mutating universal vars.
 fish_add_path --path /opt/homebrew/bin
