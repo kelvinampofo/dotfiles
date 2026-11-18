@@ -2,6 +2,11 @@
 # variable on every startup.
 set -g fish_greeting
 
+set -g nvm_default_version v26.13.1
+if status is-interactive
+    nvm use --silent $nvm_default_version
+end
+
 if test (uname) = Darwin
     set -gx SSH_SK_PROVIDER /usr/lib/ssh-keychain.dylib
 end
