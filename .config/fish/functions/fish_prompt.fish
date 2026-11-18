@@ -5,8 +5,6 @@ function fish_prompt
 
         if fish_is_root_user
                 set -a prompt_components "$color_red#"
-        else if test $last_command_status -ne 0
-                set -a prompt_components "$color_red!"
         end
 
         set -a prompt_components (set_color -o cyan)(prompt_pwd)
@@ -18,6 +16,10 @@ function fish_prompt
 
         if test -n "$branch"
                 set -a prompt_components (set_color B0B9F9)$branch
+        end
+
+        if test $last_command_status -ne 0
+                set -a prompt_components "$color_red""[$last_command_status]"
         end
 
         echo -n -s (string join ' ' $prompt_components) ' ' (set_color CBA6F7) '>' (set_color normal) ' '
